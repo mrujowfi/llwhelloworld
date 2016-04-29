@@ -5,6 +5,7 @@ import hashlib
 import lxml
 import time
 import os
+import traceback
 from lxml import etree
 
 
@@ -38,7 +39,7 @@ class llwprivate:
                 return echostr
             return 'not equal'
         except Exception, e:
-            return 'exception:'+str(e)
+            return 'exception:'+str(e)+'\n'+traceback.print_stack()
 
     def POST(self):
         try:
@@ -50,4 +51,4 @@ class llwprivate:
             toUser=xml.find("ToUserName").text
             return self.render.reply_text(fromUser,toUser,int(time.time()),u"我现在还在开发中，还没有什么功能，您刚才说的是："+content)
         except Exception, e:
-            return 'exception:'+str(e)
+            return 'exception:'+str(e)+'\n'+traceback.print_stack()
