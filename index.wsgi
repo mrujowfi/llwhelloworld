@@ -7,7 +7,7 @@ from index import index
 from llwprivate import llwprivate
 
 urls = (
-    '/index', 'index'
+    '/index', 'index',
     '/llwprivate', 'llwprivate'
 )
 
