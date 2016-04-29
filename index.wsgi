@@ -7,6 +7,15 @@ import time
 import os
 from lxml import etree
 
+urls = (
+    '/index', 'index'
+)
+
+class index:
+    def GET(self):
+        return "get, world!"
+    def POST(self):
+        return "post, world!"
 
 class WeixinInterface:
 
@@ -52,4 +61,6 @@ def app(environ, start_response):
     start_response(status, response_headers)
     return ['Hello, world23!']
 
-application = sae.create_wsgi_app(app)
+# application = sae.create_wsgi_app(app)
+app2 = web.application(urls, globals()).wsgifunc()
+application = sae.create_wsgi_app(app2)
