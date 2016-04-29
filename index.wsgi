@@ -4,6 +4,7 @@ import web
 import os
 
 from index import index
+from llwprivate import llwprivate
 
 urls = (
     '/index', 'index'
