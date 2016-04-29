@@ -6,16 +6,11 @@ import lxml
 import time
 import os
 from lxml import etree
+from index import index
 
 urls = (
     '/index', 'index'
 )
-
-class index:
-    def GET(self):
-        return "get, world!"
-    def POST(self):
-        return "post, world!"
 
 class WeixinInterface:
 
