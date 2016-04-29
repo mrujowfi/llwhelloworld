@@ -40,12 +40,15 @@ class llwprivate:
                 return echostr
             return 'not equal'
         except Exception, e:
-            except_str = ''
-            info = sys.exc_info()
-            for except_file, lineno, function, text in traceback.extract_tb(info[2]):
-                except_str += except_file+" line: "+lineno+" in "+function+"\n"+text
-            except_str += "** %s: %s" % info[:2]
-            return except_str
+            try:
+                except_str = ''
+                info = sys.exc_info()
+                for except_file, lineno, function, text in traceback.extract_tb(info[2]):
+                    except_str += except_file+" line: "+lineno+" in "+function+"\n"+text
+                except_str += "** %s: %s" % info[:2]
+                return except_str
+            except Exception, e:
+                return repr(e)
 
     def POST(self):
         try:
@@ -57,9 +60,12 @@ class llwprivate:
             toUser=xml.find("ToUserName").text
             return self.render.reply_text(fromUser,toUser,int(time.time()),u"我现在还在开发中，还没有什么功能，您刚才说的是："+content)
         except Exception, e:
-            except_str = ''
-            info = sys.exc_info()
-            for except_file, lineno, function, text in traceback.extract_tb(info[2]):
-                except_str += except_file+" line: "+lineno+" in "+function+"\n"+text
-            except_str += "** %s: %s" % info[:2]
-            return except_str
+            try:
+                except_str = ''
+                info = sys.exc_info()
+                for except_file, lineno, function, text in traceback.extract_tb(info[2]):
+                    except_str += except_file+" line: "+lineno+" in "+function+"\n"+text
+                except_str += "** %s: %s" % info[:2]
+                return except_str
+            except Exception, e:
+                return repr(e)
