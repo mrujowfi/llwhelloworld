@@ -20,9 +20,9 @@ urls = (
 # application = sae.create_wsgi_app(app)
 
 
-app_root = os.path.dirname(__file__)
-templates_root = os.path.join(app_root, 'templates')
-render = web.template.render(templates_root)
+# app_root = os.path.dirname(__file__)
+# templates_root = os.path.join(app_root, 'templates')
+# render = web.template.render(templates_root)
 
 app2 = web.application(urls, globals()).wsgifunc()
 application = sae.create_wsgi_app(app2)
