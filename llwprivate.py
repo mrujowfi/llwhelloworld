@@ -6,6 +6,7 @@ import lxml
 import time
 import os
 import traceback
+import sys
 from lxml import etree
 
 
@@ -39,7 +40,12 @@ class llwprivate:
                 return echostr
             return 'not equal'
         except Exception, e:
-            return 'exception:'+str(e)+'\n'+traceback.print_stack()
+            except_str = ''
+            info = sys.exc_info()
+            for except_file, lineno, function, text in traceback.extract_tb(info[2]):
+                except_str += except_file+" line: "+lineno+" in "+function+"\n"+text
+            except_str += "** %s: %s" % info[:2]
+            return except_str
 
     def POST(self):
         try:
@@ -51,4 +57,9 @@ class llwprivate:
             toUser=xml.find("ToUserName").text
             return self.render.reply_text(fromUser,toUser,int(time.time()),u"我现在还在开发中，还没有什么功能，您刚才说的是："+content)
         except Exception, e:
-            return 'exception:'+str(e)+'\n'+traceback.print_stack()
+            except_str = ''
+            info = sys.exc_info()
+            for except_file, lineno, function, text in traceback.extract_tb(info[2]):
+                except_str += except_file+" line: "+lineno+" in "+function+"\n"+text
+            except_str += "** %s: %s" % info[:2]
+            return except_str
