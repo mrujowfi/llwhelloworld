@@ -4,6 +4,6 @@ import web
 
 class index:
     def GET(self):
-        return "get, world!"
+        return "get, world2!"
     def POST(self):
-        return "post, world!"
+        return "post, world2!"
