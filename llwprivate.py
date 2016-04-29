@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 __author__ = 'lw'
 import web
 import hashlib
@@ -15,31 +16,31 @@ class llwprivate:
         self.render = web.template.render(self.templates_root)
 
     def GET(self):
-        #»ñÈ¡ÊäÈë²ÎÊı
+        # è·å–è¾“å…¥å‚æ•°
         data = web.input()
         signature=data.signature
         timestamp=data.timestamp
         nonce=data.nonce
         echostr=data.echostr
-        #×Ô¼ºµÄtoken
-        token="yangyanxinga" #ÕâÀï¸ÄĞ´ÄãÔÚÎ¢ĞÅ¹«ÖÚÆ½Ì¨ÀïÊäÈëµÄtoken
-        #×ÖµäĞòÅÅĞò
+        #è‡ªå·±çš„token
+        token="yangyanxinga" #è¿™é‡Œæ”¹å†™ä½ åœ¨å¾®ä¿¡å…¬ä¼—å¹³å°é‡Œè¾“å…¥çš„token
+        #å­—å…¸åºæ’åº
         list=[token,timestamp,nonce]
         list.sort()
         sha1=hashlib.sha1()
         map(sha1.update,list)
         hashcode=sha1.hexdigest()
-        #sha1¼ÓÃÜËã·¨
+        #sha1åŠ å¯†ç®—æ³•
 
-        #Èç¹ûÊÇÀ´×ÔÎ¢ĞÅµÄÇëÇó£¬Ôò»Ø¸´echostr
+        #å¦‚æœæ˜¯æ¥è‡ªå¾®ä¿¡çš„è¯·æ±‚ï¼Œåˆ™å›å¤echostr
         if hashcode == signature:
             return echostr
 
     def POST(self):
-        str_xml = web.data() #»ñµÃpostÀ´µÄÊı¾İ
-        xml = etree.fromstring(str_xml)#½øĞĞXML½âÎö
-        content=xml.find("Content").text#»ñµÃÓÃ»§ËùÊäÈëµÄÄÚÈİ
+        str_xml = web.data() #è·å¾—postæ¥çš„æ•°æ®
+        xml = etree.fromstring(str_xml)#è¿›è¡ŒXMLè§£æ
+        content=xml.find("Content").text#è·å¾—ç”¨æˆ·æ‰€è¾“å…¥çš„å†…å®¹
         msgType=xml.find("MsgType").text
         fromUser=xml.find("FromUserName").text
         toUser=xml.find("ToUserName").text
-        return self.render.reply_text(fromUser,toUser,int(time.time()),u"ÎÒÏÖÔÚ»¹ÔÚ¿ª·¢ÖĞ£¬»¹Ã»ÓĞÊ²Ã´¹¦ÄÜ£¬Äú¸Õ²ÅËµµÄÊÇ£º"+content)
+        return self.render.reply_text(fromUser,toUser,int(time.time()),u"æˆ‘ç°åœ¨è¿˜åœ¨å¼€å‘ä¸­ï¼Œè¿˜æ²¡æœ‰ä»€ä¹ˆåŠŸèƒ½ï¼Œæ‚¨åˆšæ‰è¯´çš„æ˜¯ï¼š"+content)
