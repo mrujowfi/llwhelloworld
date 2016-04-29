@@ -44,7 +44,7 @@ class llwprivate:
                 except_str = ''
                 info = sys.exc_info()
                 for except_file, lineno, function, text in traceback.extract_tb(info[2]):
-                    except_str += except_file+" line: "+lineno+" in "+function+"\n"+text
+                    except_str += except_file+" line: "+str(lineno)+" in "+function+"\n"+text
                 except_str += "** %s: %s" % info[:2]
                 return except_str
             except Exception, e:
@@ -64,7 +64,7 @@ class llwprivate:
                 except_str = ''
                 info = sys.exc_info()
                 for except_file, lineno, function, text in traceback.extract_tb(info[2]):
-                    except_str += except_file+" line: "+lineno+" in "+function+"\n"+text
+                    except_str += except_file+" line: "+str(lineno)+" in "+function+"\n"+text
                 except_str += "** %s: %s" % info[:2]
                 return except_str
             except Exception, e:
