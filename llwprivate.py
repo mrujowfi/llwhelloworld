@@ -8,6 +8,8 @@ import os
 import traceback
 import sys
 from lxml import etree
+import module_share
+import module_share_kelly
 
 
 class llwprivate:
@@ -75,5 +77,8 @@ class llwprivate:
         if content == '233':
             file_name = os.listdir(os.path.dirname(__file__)+'/data_share')
             result = repr(file_name)
+        elif content == '2333':
+            module_share.synHistory(['600229.SS'])
+            result = module_share_kelly.load_share('600229.SS')
         return result
 
