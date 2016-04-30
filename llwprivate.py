@@ -77,8 +77,10 @@ class llwprivate:
         if content == '233':
             file_name = os.listdir(os.path.dirname(__file__)+'/data_share')
             result = repr(file_name)
-        elif content == '2333':
+        elif content == '2331':
             module_share.synHistory(['600229.SS'])
+            result = 'syn'
+        elif content == '2332':
             result = module_share_kelly.load_share('600229.SS')
         return result
 

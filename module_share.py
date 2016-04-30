@@ -39,7 +39,7 @@ def get_historical_prices(symbol, start_date, end_date, proxies=None):
     # proxies = {
     #     "http": "http://123.58.129.48:443"
     # }
-    req = requests.get(url, timeout=15, proxies=proxies)
+    req = requests.get(url, timeout=5, proxies=proxies)
     content = req.text
     daily_data = content.splitlines()
     hist_dict = dict()
