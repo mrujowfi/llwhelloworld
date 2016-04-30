@@ -3,6 +3,7 @@ __author__ = 'lw'
 import web
 import hashlib
 import lxml
+import random
 import time
 import os
 import traceback
@@ -86,6 +87,8 @@ class llwprivate:
             result = module_share_kelly.test_read()
         elif content == '2334':
             data = module_share.synHistory(['600229.SS'])
-            result = module_share_kelly.load_share('600229.SS', data['600229.SS'])[1]
+            result = module_share_kelly.load_share('600229.SS', data['600229.SS'])[1]*10+random.random()
+        else:
+            result += str(random.random())
         return str(result)
 
