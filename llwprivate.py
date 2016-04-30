@@ -54,11 +54,11 @@ class llwprivate:
         try:
             str_xml = web.data() #获得post来的数据
             xml = etree.fromstring(str_xml)#进行XML解析
-            content=xml.find("Content").text#获得用户所输入的内容
-            msgType=xml.find("MsgType").text
-            fromUser=xml.find("FromUserName").text
-            toUser=xml.find("ToUserName").text
-            return self.render.reply_text(fromUser,toUser,int(time.time()),u".. "+content)
+            content = self.process(xml.find("Content").text)#获得用户所输入的内容
+            msgType = xml.find("MsgType").text
+            fromUser = xml.find("FromUserName").text
+            toUser = xml.find("ToUserName").text
+            return self.render.reply_text(fromUser,toUser,int(time.time()),u"..."+content)
         except Exception, e:
             try:
                 except_str = ''
@@ -69,3 +69,11 @@ class llwprivate:
                 return except_str
             except Exception, e:
                 return repr(e)
+
+    def process(self, content):
+        result = content
+        if content == '233':
+            file_name = os.listdir(os.path.dirname(__file__)+'/data_share')
+            result = repr(file_name)
+        return result
+
