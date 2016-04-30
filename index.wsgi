@@ -2,6 +2,7 @@
 import sae
 import web
 import os
+import sys
 # git remote add sae21 https://git.sinacloud.com/llwhelloworld
 # git push sae20 master:10
 
@@ -23,6 +24,7 @@ urls = (
 
 
 app_root = os.path.dirname(__file__)
+sys.path.insert(0, os.path.join(app_root, 'site-packages'))
 templates_root = os.path.join(app_root, 'templates')
 render = web.template.render(templates_root)
 
