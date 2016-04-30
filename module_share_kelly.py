@@ -118,6 +118,14 @@ def summary(txt_name):
     print money
     return (str(money), str(last_f), str(sum_day))
 
+
+def test_read():
+    f = open(os.path.dirname(__file__)+'/data_share/test_file.txt')
+    content = f.read()
+    f.close()
+    return content
+
+
 if __name__ == '__main__':
     # file_name = os.listdir(r'G:\llw\code\python\shares\step')
     # result = {}

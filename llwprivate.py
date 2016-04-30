@@ -79,8 +79,10 @@ class llwprivate:
             result = repr(file_name)
         elif content == '2331':
             # module_share.synHistory(['600229.SS'])
-            result = module_share.test()
+            result = module_share.test_requests()
         elif content == '2332':
-            result = module_share_kelly.load_share('600229.SS')
+            result = module_share.test_write()
+        elif content == '2333':
+            result = module_share_kelly.test_read()
         return result
 

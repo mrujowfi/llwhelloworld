@@ -103,12 +103,21 @@ def synHistory(shares, date1='2015-01-01', date2='today'):
             continue
         break
 
-def test():
+
+def test_requests():
     resp = requests.get("http://llwhelloworld.applinzi.com/")
     return resp.content
+
+
+def test_write():
+    content = json.dumps({'test': 1}, sort_keys=True, indent=4, separators=(',', ': '))
+    f = open(os.path.dirname(__file__)+'/data_share/test_file.txt', 'w')
+    f.write(content)
+    f.close()
+    return content
 
 
 if __name__ == '__main__':
     print os.path.dirname(__file__)
     # synHistory(['600229.SS'])
-    print test()
+    print test_requests()
