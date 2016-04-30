@@ -58,7 +58,7 @@ class llwprivate:
             msgType=xml.find("MsgType").text
             fromUser=xml.find("FromUserName").text
             toUser=xml.find("ToUserName").text
-            return self.render.reply_text(fromUser,toUser,int(time.time()),u""+content)
+            return self.render.reply_text(fromUser,toUser,int(time.time()),u".. "+content)
         except Exception, e:
             try:
                 except_str = ''
