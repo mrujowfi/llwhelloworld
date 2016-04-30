@@ -84,5 +84,8 @@ class llwprivate:
             result = module_share.test_write()
         elif content == '2333':
             result = module_share_kelly.test_read()
-        return result
+        elif content == '2334':
+            data = module_share.synHistory(['600229.SS'])
+            result = module_share_kelly.load_share('600229.SS', data['600229.SS'])[1]
+        return str(result)
 

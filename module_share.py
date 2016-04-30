@@ -17,6 +17,7 @@ import os
 import urllib
 import datetime
 import traceback
+import module_share_kelly
 import pprint
 
 global allShares, dictStart, getShares, dictPlate
@@ -70,6 +71,7 @@ def get_historical_prices(symbol, start_date, end_date, proxies=None):
 
 
 def synHistory(shares, date1='2015-01-01', date2='today'):
+    result = {}
     listCode = list()
     for each in shares:
         listCode.append(each)
@@ -90,9 +92,10 @@ def synHistory(shares, date1='2015-01-01', date2='today'):
                 if os.path.exists(os.path.dirname(__file__)+'/data_share/'+each+'.txt'):
                     os.remove(os.path.dirname(__file__)+'/data_share/'+each+'.txt')
                 data = get_historical_prices(each, startDate, endDate, proxies)
-                f = open(os.path.dirname(__file__)+'/data_share/'+each+'.txt', 'w')
-                f.write(json.dumps(data, sort_keys=True, indent=4, separators=(',', ': ')))
-                f.close()
+                result[each] = data
+                # f = open(os.path.dirname(__file__)+'/data_share/'+each+'.txt', 'w')
+                # f.write(json.dumps(data, sort_keys=True, indent=4, separators=(',', ': ')))
+                # f.close()
         except Exception, e:
             print 'step2 error:'+str(e)
             stack = traceback.format_exc()
@@ -102,7 +105,7 @@ def synHistory(shares, date1='2015-01-01', date2='today'):
             time.sleep(5)
             continue
         break
-
+    return result
 
 def test_requests():
     resp = requests.get("http://llwhelloworld.applinzi.com/")
@@ -119,5 +122,6 @@ def test_write():
 
 if __name__ == '__main__':
     print os.path.dirname(__file__)
-    # synHistory(['600229.SS'])
+    data = synHistory(['600229.SS'])
+    print module_share_kelly.load_share('600229.SS', data['600229.SS'])[1]
     print test_requests()

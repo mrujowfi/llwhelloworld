@@ -17,7 +17,7 @@ history = 120
 last_f = 0.0
 
 
-def load_share(txt_name):
+def load_share(txt_name, data=None):
     global share_data, except_data, money, cash, gu, sum_day, history, last_f
 
     share_data = {}
@@ -27,9 +27,12 @@ def load_share(txt_name):
     gu = 0
     sum_day = 0
     history = 120
-    fin = open(os.path.dirname(__file__)+'/data_share/'+txt_name+'.txt')
-    share_data = json.load(fin)
-    fin.close()
+    if data is not None:
+        share_data = data
+    else:
+        fin = open(os.path.dirname(__file__)+'/data_share/'+txt_name+'.txt')
+        share_data = json.load(fin)
+        fin.close()
     #print len(share_data)
 
     except_data = {}
