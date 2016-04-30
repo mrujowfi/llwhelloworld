@@ -7,3 +7,6 @@ libraries:
 
 - name: lxml
   version: "2.3.4"
+
+- name: requests
+  version: "2.7.0"
