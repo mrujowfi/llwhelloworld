@@ -24,7 +24,7 @@ urls = (
 
 
 app_root = os.path.dirname(__file__)
-sys.path.insert(0, os.path.join(app_root, 'site-packages'))
+sys.path.insert(0, os.path.join(app_root, 'requests'))
 templates_root = os.path.join(app_root, 'templates')
 render = web.template.render(templates_root)
 

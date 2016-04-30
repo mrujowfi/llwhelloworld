@@ -50,13 +50,13 @@ try:
 except SyntaxError as e:
     raise ImportError(e)
 
-import OpenSSL.SSL
-from pyasn1.codec.der import decoder as der_decoder
-from pyasn1.type import univ, constraint
 from socket import _fileobject, timeout
 import ssl
 import select
 
+import OpenSSL.SSL
+from pyasn1.codec.der import decoder as der_decoder
+from pyasn1.type import univ, constraint
 from .. import connection
 from .. import util
 

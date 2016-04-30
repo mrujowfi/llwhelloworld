@@ -9,11 +9,10 @@ This module contains the primary objects that power Requests.
 
 import collections
 import datetime
+from io import UnsupportedOperation
 
-from io import BytesIO, UnsupportedOperation
 from .hooks import default_hooks
 from .structures import CaseInsensitiveDict
-
 from .auth import HTTPBasicAuth
 from .cookies import cookiejar_from_dict, get_cookie_header, _copy_cookie_jar
 from .packages.urllib3.fields import RequestField
@@ -29,9 +28,9 @@ from .utils import (
     stream_decode_response_unicode, to_key_val_list, parse_header_links,
     iter_slices, guess_json_utf, super_len, to_native_string)
 from .compat import (
-    cookielib, urlunparse, urlsplit, urlencode, str, bytes, StringIO,
-    is_py2, chardet, json, builtin_str, basestring)
+    cookielib, urlunparse, urlsplit, urlencode, str, bytes, is_py2, chardet, json, builtin_str, basestring)
 from .status_codes import codes
+
 
 #: The set of HTTP status codes that indicate an automatically
 #: processable redirect.

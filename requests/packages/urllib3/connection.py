@@ -3,6 +3,7 @@ import sys
 import socket
 from socket import timeout as SocketTimeout
 import warnings
+
 from .packages import six
 
 try:  # Python 3

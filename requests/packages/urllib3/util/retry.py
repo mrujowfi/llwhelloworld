@@ -10,7 +10,6 @@ from ..exceptions import (
 )
 from ..packages import six
 
-
 log = logging.getLogger(__name__)
 
 

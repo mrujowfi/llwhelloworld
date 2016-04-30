@@ -1,5 +1,4 @@
 import codecs
-
 from uuid import uuid4
 from io import BytesIO
 

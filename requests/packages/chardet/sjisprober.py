@@ -26,20 +26,21 @@
 ######################### END LICENSE BLOCK #########################
 
 import sys
-from . import constants
+
 from .mbcharsetprober import MultiByteCharSetProber
 from .codingstatemachine import CodingStateMachine
-from .chardistribution import EUCJPDistributionAnalysis
-from .jpcntx import EUCJPContextAnalysis
-from .mbcssm import EUCJPSMModel
+from .chardistribution import SJISDistributionAnalysis
+from .jpcntx import SJISContextAnalysis
+from .mbcssm import SJISSMModel
+from . import constants
 
 
-class EUCJPProber(MultiByteCharSetProber):
+class SJISProber(MultiByteCharSetProber):
     def __init__(self):
         MultiByteCharSetProber.__init__(self)
-        self._mCodingSM = CodingStateMachine(EUCJPSMModel)
-        self._mDistributionAnalyzer = EUCJPDistributionAnalysis()
-        self._mContextAnalyzer = EUCJPContextAnalysis()
+        self._mCodingSM = CodingStateMachine(SJISSMModel)
+        self._mDistributionAnalyzer = SJISDistributionAnalysis()
+        self._mContextAnalyzer = SJISContextAnalysis()
         self.reset()
 
     def reset(self):
@@ -47,12 +48,11 @@ class EUCJPProber(MultiByteCharSetProber):
         self._mContextAnalyzer.reset()
 
     def get_charset_name(self):
-        return "EUC-JP"
+        return self._mContextAnalyzer.get_charset_name()
 
     def feed(self, aBuf):
         aLen = len(aBuf)
         for i in range(0, aLen):
-            # PY3K: aBuf is a byte array, so aBuf[i] is an int, not a byte
             codingState = self._mCodingSM.next_state(aBuf[i])
             if codingState == constants.eError:
                 if constants._debug:
@@ -68,10 +68,12 @@ class EUCJPProber(MultiByteCharSetProber):
                 charLen = self._mCodingSM.get_current_charlen()
                 if i == 0:
                     self._mLastChar[1] = aBuf[0]
-                    self._mContextAnalyzer.feed(self._mLastChar, charLen)
+                    self._mContextAnalyzer.feed(self._mLastChar[2 - charLen:],
+                                                charLen)
                     self._mDistributionAnalyzer.feed(self._mLastChar, charLen)
                 else:
-                    self._mContextAnalyzer.feed(aBuf[i - 1:i + 1], charLen)
+                    self._mContextAnalyzer.feed(aBuf[i + 1 - charLen:i + 3
+                                                     - charLen], charLen)
                     self._mDistributionAnalyzer.feed(aBuf[i - 1:i + 1],
                                                      charLen)
 
