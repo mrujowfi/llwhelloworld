@@ -103,8 +103,12 @@ def synHistory(shares, date1='2015-01-01', date2='today'):
             continue
         break
 
+def test():
+    resp = requests.get("http://llwhelloworld.applinzi.com/")
+    return resp.content
+
 
 if __name__ == '__main__':
     print os.path.dirname(__file__)
-    synHistory(['600229.SS'])
-
+    # synHistory(['600229.SS'])
+    print test()
