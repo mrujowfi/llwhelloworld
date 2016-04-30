@@ -8,5 +8,5 @@ libraries:
 - name: lxml
   version: "2.3.4"
 
-- name: requests
+- name: requestspy
   version: "2.7.0"
