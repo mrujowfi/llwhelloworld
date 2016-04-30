@@ -26,7 +26,7 @@ class llwprivate:
             nonce=data.nonce
             echostr=data.echostr
             #自己的token
-            token="yangyanxinga" #这里改写你在微信公众平台里输入的token
+            token="llwprivate233" #这里改写你在微信公众平台里输入的token
             #字典序排序
             list=[token,timestamp,nonce]
             list.sort()

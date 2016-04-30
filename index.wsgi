@@ -2,6 +2,8 @@
 import sae
 import web
 import os
+# git remote add sae21 https://git.sinacloud.com/llwhelloworld
+# git push sae20 master:10
 
 from index import index
 from llwprivate import llwprivate
