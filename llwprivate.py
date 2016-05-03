@@ -88,15 +88,16 @@ class llwprivate:
             result = repr(file_name)
         elif content == '2331':
             # module_share.synHistory(['600229.SS'])
-            result = module_share.test_requests()
+            result = str(module_share.test_requests())
         elif content == '2332':
-            result = module_share.test_write()
+            result = str(module_share.test_write())
         elif content == '2333':
-            result = module_share_kelly.test_read()
+            result = str(module_share_kelly.test_read())
         elif content == '2334':
             data = module_share.synHistory(['600229.SS'])
-            result = float(module_share_kelly.load_share('600229.SS', data['600229.SS'])[1])*10+random.random()
+            result = str(float(module_share_kelly.load_share('600229.SS', data['600229.SS'])[1])*100+random.random())
         else:
-            result += str(random.random())
-        return str(result)
+            # result += str(random.random())
+            pass
+        return result
 
