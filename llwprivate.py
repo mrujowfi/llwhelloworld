@@ -54,8 +54,8 @@ class llwprivate:
                 return repr(e)
 
     def POST(self):
+        str_xml = web.data() #获得post来的数据
         try:
-            str_xml = web.data() #获得post来的数据
             xml = etree.fromstring(str_xml)#进行XML解析
             content = self.process(xml.find("Content").text)#获得用户所输入的内容
             msgType = xml.find("MsgType").text
@@ -69,9 +69,17 @@ class llwprivate:
                 for except_file, lineno, function, text in traceback.extract_tb(info[2]):
                     except_str += except_file+' line: '+str(lineno)+' in '+function+'\n'+text+'\n'
                 except_str += "** %s: %s" % info[:2]
-                return except_str
+                xml = etree.fromstring(str_xml)#进行XML解析
+                msgType = xml.find("MsgType").text
+                fromUser = xml.find("FromUserName").text
+                toUser = xml.find("ToUserName").text
+                return self.render.reply_text(fromUser,toUser,int(time.time()),u"."+fromUser+' '+toUser+' '+except_str)
             except Exception, e:
-                return repr(e)
+                xml = etree.fromstring(str_xml)#进行XML解析
+                msgType = xml.find("MsgType").text
+                fromUser = xml.find("FromUserName").text
+                toUser = xml.find("ToUserName").text
+                return self.render.reply_text(fromUser,toUser,int(time.time()),u"."+str(e))
 
     def process(self, content):
         result = str(content)
