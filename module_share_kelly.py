@@ -77,7 +77,7 @@ def count_f3(txt_name):
                 f = (p*b - q*c)/(b*c)
             else:
                 f = 0.5
-            f = round(f, 2)
+            f = round(f, 3)
             # print f, max_last, min_last
 
             if f > 1:

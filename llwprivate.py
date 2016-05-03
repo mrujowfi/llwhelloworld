@@ -64,22 +64,28 @@ class llwprivate:
             return self.render.reply_text(fromUser,toUser,int(time.time()),u"..."+fromUser+u' '+toUser+u' '+content)
         except Exception, e:
             try:
-                except_str = u''
-                info = sys.exc_info()
-                for except_file, lineno, function, text in traceback.extract_tb(info[2]):
-                    except_str = except_str + except_file+u' line: '+str(lineno)+u' in '+function+u'\n'+text+u'\n'
-                except_str += u"** %s: %s" % info[:2]
                 xml = etree.fromstring(str_xml)#进行XML解析
                 msgType = xml.find("MsgType").text
                 fromUser = xml.find("FromUserName").text
                 toUser = xml.find("ToUserName").text
-                return self.render.reply_text(fromUser,toUser,int(time.time()),u".."+fromUser+u' '+toUser+u' '+except_str)
+                if fromUser == 'oz2nXjuKi6FO3iQz18AR7ArLIYAY':
+                    except_str = u''
+                    info = sys.exc_info()
+                    for except_file, lineno, function, text in traceback.extract_tb(info[2]):
+                        except_str = except_str + except_file+u' line: '+str(lineno)+u' in '+function+u'\n'+text+u'\n'
+                    except_str += u"** %s: %s" % info[:2]
+                    return self.render.reply_text(fromUser,toUser,int(time.time()),u".."+fromUser+u' '+toUser+u' '+except_str)
+                else:
+                    return ''
             except Exception, e:
                 xml = etree.fromstring(str_xml)#进行XML解析
                 msgType = xml.find("MsgType").text
                 fromUser = xml.find("FromUserName").text
                 toUser = xml.find("ToUserName").text
-                return self.render.reply_text(fromUser,toUser,int(time.time()),u"."+fromUser+u' '+toUser+u' '+str(e))
+                if fromUser == 'oz2nXjuKi6FO3iQz18AR7ArLIYAY':
+                    return self.render.reply_text(fromUser,toUser,int(time.time()),u"."+fromUser+u' '+toUser+u' '+str(e))
+                else:
+                    return ''
 
     def process(self, content):
         result = content
@@ -95,7 +101,7 @@ class llwprivate:
             result = str(module_share_kelly.test_read())
         elif content == '2334':
             data = module_share.synHistory(['600229.SS'])
-            result = str(float(module_share_kelly.load_share('600229.SS', data['600229.SS'])[1])*100+random.random())
+            result = str(float(module_share_kelly.load_share('600229.SS', data['600229.SS'])[1]))
         else:
             # result += str(random.random())
             pass
