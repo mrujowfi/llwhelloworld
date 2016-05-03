@@ -74,7 +74,7 @@ class llwprivate:
                 return repr(e)
 
     def process(self, content):
-        result = content
+        result = str(content)
         if content == '233':
             file_name = os.listdir(os.path.dirname(__file__)+'/data_share')
             result = repr(file_name)
