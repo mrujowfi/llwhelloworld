@@ -102,13 +102,23 @@ def trade(last_close, f):
     if all_in > gu*last_close:
         # 买入
         gu_in = int((all_in - gu*last_close)/last_close)
+        shou_in = (gu_in/100)
+        # if shou_in == 0:
+        #     shou_in = 1 # 不微调反而好
+        gu_in = shou_in*100
         cash -= gu_in*last_close
         gu += gu_in
+        # print 'in '+str(gu_in)+' '+str(gu)
     elif all_in < gu*last_close:
         # 卖出
         gu_out = int((gu*last_close - all_in)/last_close)
+        shou_out = (gu_out/100)
+        # if shou_out == 0:
+        #     shou_out = 1 # 不微调反而好
+        gu_out = shou_out*100
         cash += gu_out*last_close
         gu -= gu_out
+        # print 'out '+str(gu_out)+' '+str(gu)
     money = cash + gu*last_close
 
     sum_day += 1
