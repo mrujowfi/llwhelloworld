@@ -64,10 +64,10 @@ class llwprivate:
             return self.render.reply_text(fromUser,toUser,int(time.time()),u"..."+fromUser+u' '+toUser+u' '+content)
         except Exception, e:
             try:
-                except_str = ''
+                except_str = u''
                 info = sys.exc_info()
                 for except_file, lineno, function, text in traceback.extract_tb(info[2]):
-                    except_str += except_file+u' line: '+str(lineno)+u' in '+function+u'\n'+text+u'\n'
+                    except_str = except_str + except_file+u' line: '+str(lineno)+u' in '+function+u'\n'+text+u'\n'
                 except_str += u"** %s: %s" % info[:2]
                 xml = etree.fromstring(str_xml)#进行XML解析
                 msgType = xml.find("MsgType").text
