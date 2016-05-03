@@ -57,7 +57,7 @@ class llwprivate:
         str_xml = web.data() #获得post来的数据
         try:
             xml = etree.fromstring(str_xml)#进行XML解析
-            content = xml.find("Content").text  # self.process(xml.find("Content").text)#获得用户所输入的内容
+            content = self.process(xml.find("Content").text)#获得用户所输入的内容
             msgType = xml.find("MsgType").text
             fromUser = xml.find("FromUserName").text
             toUser = xml.find("ToUserName").text
@@ -82,7 +82,7 @@ class llwprivate:
                 return self.render.reply_text(fromUser,toUser,int(time.time()),u"."+fromUser+u' '+toUser+u' '+str(e))
 
     def process(self, content):
-        result = str(content)
+        result = content
         if content == '233':
             file_name = os.listdir(os.path.dirname(__file__)+'/data_share')
             result = repr(file_name)
