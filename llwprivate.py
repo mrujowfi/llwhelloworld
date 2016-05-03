@@ -61,7 +61,7 @@ class llwprivate:
             msgType = xml.find("MsgType").text
             fromUser = xml.find("FromUserName").text
             toUser = xml.find("ToUserName").text
-            return self.render.reply_text(fromUser,toUser,int(time.time()),u"..."+fromUser+u' '+toUser+u' '+content)
+            return self.render.reply_text(fromUser,toUser,int(time.time()),u"..."+content)
         except Exception, e:
             try:
                 xml = etree.fromstring(str_xml)#进行XML解析
@@ -74,7 +74,7 @@ class llwprivate:
                     for except_file, lineno, function, text in traceback.extract_tb(info[2]):
                         except_str = except_str + except_file+u' line: '+str(lineno)+u' in '+function+u'\n'+text+u'\n'
                     except_str += u"** %s: %s" % info[:2]
-                    return self.render.reply_text(fromUser,toUser,int(time.time()),u".."+fromUser+u' '+toUser+u' '+except_str)
+                    return self.render.reply_text(fromUser,toUser,int(time.time()),u".."+except_str)
                 else:
                     return ''
             except Exception, e:
@@ -83,7 +83,7 @@ class llwprivate:
                 fromUser = xml.find("FromUserName").text
                 toUser = xml.find("ToUserName").text
                 if fromUser == 'oz2nXjuKi6FO3iQz18AR7ArLIYAY':
-                    return self.render.reply_text(fromUser,toUser,int(time.time()),u"."+fromUser+u' '+toUser+u' '+str(e))
+                    return self.render.reply_text(fromUser,toUser,int(time.time()),u"."+str(e))
                 else:
                     return ''
 
