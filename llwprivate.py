@@ -61,25 +61,25 @@ class llwprivate:
             msgType = xml.find("MsgType").text
             fromUser = xml.find("FromUserName").text
             toUser = xml.find("ToUserName").text
-            return self.render.reply_text(fromUser,toUser,int(time.time()),u"..."+content)
+            return self.render.reply_text(fromUser,toUser,int(time.time()),u"..."+fromUser+u' '+toUser+u' '+content)
         except Exception, e:
             try:
                 except_str = ''
                 info = sys.exc_info()
                 for except_file, lineno, function, text in traceback.extract_tb(info[2]):
-                    except_str += except_file+' line: '+str(lineno)+' in '+function+'\n'+text+'\n'
-                except_str += "** %s: %s" % info[:2]
+                    except_str += except_file+u' line: '+str(lineno)+u' in '+function+u'\n'+text+u'\n'
+                except_str += u"** %s: %s" % info[:2]
                 xml = etree.fromstring(str_xml)#进行XML解析
                 msgType = xml.find("MsgType").text
                 fromUser = xml.find("FromUserName").text
                 toUser = xml.find("ToUserName").text
-                return self.render.reply_text(fromUser,toUser,int(time.time()),u"."+fromUser+' '+toUser+' '+except_str)
+                return self.render.reply_text(fromUser,toUser,int(time.time()),u".."+fromUser+u' '+toUser+u' '+except_str)
             except Exception, e:
                 xml = etree.fromstring(str_xml)#进行XML解析
                 msgType = xml.find("MsgType").text
                 fromUser = xml.find("FromUserName").text
                 toUser = xml.find("ToUserName").text
-                return self.render.reply_text(fromUser,toUser,int(time.time()),u"."+str(e))
+                return self.render.reply_text(fromUser,toUser,int(time.time()),u"."+fromUser+u' '+toUser+u' '+str(e))
 
     def process(self, content):
         result = str(content)
