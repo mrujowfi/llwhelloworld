@@ -85,7 +85,8 @@ class llwprivate:
                     info = sys.exc_info()
                     lbg += '5'
                     for except_file, lineno, function, text in traceback.extract_tb(info[2]):
-                        except_str = except_str + except_file+u' line: '+str(lineno)+u' in '+function+u'\n'+text+u'\n'
+                        except_str = except_str + except_file + u'\n'
+                        # except_str = except_str + except_file+u' line: '+str(lineno)+u' in '+function+u'\n'+text+u'\n'
                     except_str += u"_B_** %s: %s" % info[:2]
                     lbg += '6'
                     return self.render.reply_text(fromUser,toUser,int(time.time()),lbg+u"__lbg__"+except_str)
