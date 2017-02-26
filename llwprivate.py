@@ -88,7 +88,7 @@ class llwprivate:
                     return ''
 
     def process(self, content):
-        result = content
+        result = '???'
         if content == '233':
             file_name = os.listdir(os.path.dirname(__file__)+'/data_share')
             result = repr(file_name)
@@ -102,6 +102,13 @@ class llwprivate:
         elif content == '2334':
             data = module_share.synHistory(['600229.SS'])
             result = str(float(module_share_kelly.load_share('600229.SS', data['600229.SS'])[1]))
+        elif content.startswith('2335_'):
+            try:
+                share = content[5:]
+                data = module_share.synHistory([share])
+                result = str(float(module_share_kelly.load_share(share, data[share])[1]))
+            except Exception, e:
+                pass
         else:
             # result += str(random.random())
             pass
