@@ -19,8 +19,9 @@ import datetime
 import traceback
 import module_share_kelly
 import re
-import smtplib
-from email.mime.text import MIMEText
+import sys
+# import smtplib
+# from email.mime.text import MIMEText
 import pprint
 
 global allShares, dictStart, getShares, dictPlate
@@ -43,6 +44,7 @@ def get_historical_prices(symbol, start_date, end_date, proxies=None):
     # proxies = {
     #     "http": "http://123.58.129.48:443"
     # }
+    print url
     req = requests.get(url, timeout=5, proxies=proxies)
     content = req.text
     daily_data = content.splitlines()
@@ -60,7 +62,12 @@ def get_historical_prices(symbol, start_date, end_date, proxies=None):
                  keys[5]: day_data[5],
                  keys[6]: day_data[6]}
     except IndexError, e:
-        print str(e)
+        except_str = ''
+        info = sys.exc_info()
+        for except_file, lineno, function, text in traceback.extract_tb(info[2]):
+            except_str += except_file + ' line: ' + str(lineno) + ' in ' + function + '\n' + text + '\n'
+        except_str += "** %s: %s" % info[:2]
+        print except_str
         print content
         hist_dict = None
     return hist_dict
@@ -73,7 +80,7 @@ def get_historical_prices(symbol, start_date, end_date, proxies=None):
 '''
 
 
-def synHistory(shares, date1='2015-01-01', date2='today'):
+def synHistory(shares, date1='2016-01-01', date2='today'):
     result = {}
     listCode = list()
     for each in shares:
@@ -289,6 +296,7 @@ def synShares(b_save_file=False):
             #
             # #os.remove('step0.txt')
             # #os.remove('step1.txt')
+            os.remove('step0.txt')
         except Exception, e:
             print 'exception3'+str(e)
             time.sleep(5)
@@ -312,27 +320,27 @@ def getJrjimgUrl(url, timeout=30):
     return req
 
 
-#发送邮件，默认是用easyprowllw@163.com发送
-def sendNotifyMail(listTo, title, content, fromUser='easyprowllw', fromPassword='prowllw10'):#发送邮件
-    mail_host="smtp.163.com"#设置服务器
-    mail_postfix="163.com"  #发件箱的后缀
-
-    me="easy"+"<"+fromUser+"@"+mail_postfix+">"#接收方显示
-    msg = MIMEText(content, _subtype='plain', _charset='gb2312')#内容
-    msg['Subject'] = title#标题
-    msg['From'] = me
-    msg['To'] = ";".join(listTo)
-    try:
-        server = smtplib.SMTP()
-        server.connect(mail_host)
-        server.login(fromUser,fromPassword)
-        server.sendmail(me, listTo, msg.as_string())
-        server.close()
-        return True
-    except Exception, e:
-        print 'error: ', str(e)
-        server.close()
-        return False
+# #发送邮件，默认是用easyprowllw@163.com发送
+# def sendNotifyMail(listTo, title, content, fromUser='easyprowllw', fromPassword='prowllw10'):#发送邮件
+#     mail_host="smtp.163.com"#设置服务器
+#     mail_postfix="163.com"  #发件箱的后缀
+#
+#     me="easy"+"<"+fromUser+"@"+mail_postfix+">"#接收方显示
+#     msg = MIMEText(content, _subtype='plain', _charset='gb2312')#内容
+#     msg['Subject'] = title#标题
+#     msg['From'] = me
+#     msg['To'] = ";".join(listTo)
+#     try:
+#         server = smtplib.SMTP()
+#         server.connect(mail_host)
+#         server.login(fromUser,fromPassword)
+#         server.sendmail(me, listTo, msg.as_string())
+#         server.close()
+#         return True
+#     except Exception, e:
+#         print 'error: ', str(e)
+#         server.close()
+#         return False
 
 
 def test_requests():
@@ -348,9 +356,43 @@ def test_write():
     return content
 
 
+def test_kelly():
+    f = open('share_name.txt')
+    all_share = json.loads(f.read())
+    f.close()
+    set_tested = set()
+    d_result = dict()
+    w_count = 0
+    w_now = ''
+    while w_count<10:
+        try:
+            for e_key in all_share:
+                if e_key not in set_tested:
+                    print e_key+'download'
+                    data = synHistory([e_key])
+                    print e_key + 'test'
+                    d_result[e_key] = module_share_kelly.load_share(e_key, data[e_key])
+                    set_tested.add(e_key)
+            break
+        except Exception, e:
+            print 'retry '+e_key
+            if w_now == e_key:
+                set_tested.add(e_key)
+                print e_key+' failed'
+            else:
+                w_now = e_key
+            time.sleep(3)
+    f = open('test_result.txt', 'w')
+    for e_key in d_result:
+        f.write('%s,%s,%s,%s\n' % (e_key, d_result[e_key][0], d_result[e_key][1], d_result[e_key][2]))
+    f.close()
+    return
+
 if __name__ == '__main__':
     # print os.path.dirname(__file__)
-    # data = synHistory(['600229.SS'])
-    # print module_share_kelly.load_share('600229.SS', data['600229.SS'])[1]
+    # data = synHistory(['300597.SZ'])
+    # print module_share_kelly.load_share('300597.SZ', data['300597.SZ'])[1]
     # print test_requests()
-    synShares()
+    # synShares() # refresh share names
+    test_kelly()
+
