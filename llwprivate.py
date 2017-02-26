@@ -57,10 +57,10 @@ class llwprivate:
         str_xml = web.data() #获得post来的数据
         try:
             xml = etree.fromstring(str_xml)#进行XML解析
-            content = self.process(xml.find("Content").text)#获得用户所输入的内容
             msgType = xml.find("MsgType").text
             fromUser = xml.find("FromUserName").text
             toUser = xml.find("ToUserName").text
+            content = self.process(xml.find("Content").text)  # 获得用户所输入的内容
             return self.render.reply_text(fromUser,toUser,int(time.time()),u"..."+content)
         except Exception, e:
             try:
@@ -76,7 +76,7 @@ class llwprivate:
                     except_str += u"** %s: %s" % info[:2]
                     return self.render.reply_text(fromUser,toUser,int(time.time()),u".."+except_str)
                 else:
-                    return ''
+                    return self.render.reply_text(fromUser,toUser,int(time.time()),fromUser)
             except Exception, e:
                 xml = etree.fromstring(str_xml)#进行XML解析
                 msgType = xml.find("MsgType").text
@@ -85,7 +85,7 @@ class llwprivate:
                 if fromUser == 'oz2nXjuKi6FO3iQz18AR7ArLIYAY':
                     return self.render.reply_text(fromUser,toUser,int(time.time()),u"."+str(e))
                 else:
-                    return ''
+                    return self.render.reply_text(fromUser,toUser,int(time.time()),fromUser)
 
     def process(self, content):
         result = '???'
