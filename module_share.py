@@ -143,51 +143,51 @@ def synShares(b_save_file=False):
             dictStart['gainian']['pages'] = int( re.match(r'[\s\S]*?,pages:([0-9]*),', req.text[0:100]).group(1))
             dictStart['gainian']['name'] = u'概念'
             dictStart['gainian']['url'] = u"http://q.jrjimg.cn/?q=cn|bk|5&n=hqa&c=l&o=pl,d&p={page}050&_dc="
-            print 'gainian pages:'+str(dictStart['gainian']['pages'])
+            # print 'gainian pages:'+str(dictStart['gainian']['pages'])
 
             #行业
             req = getJrjimgUrl(u"http://q.jrjimg.cn/?q=cn|bk|7&n=hqa&c=l&o=pl,d&p=1050&_dc="+u'%d'%(time.time()*1000))
             dictStart['hangye']['pages'] = int( re.match(r'[\s\S]*?,pages:([0-9]*),', req.text[0:100]).group(1))
             dictStart['hangye']['name'] = u'行业'
             dictStart['hangye']['url'] = u"http://q.jrjimg.cn/?q=cn|bk|7&n=hqa&c=l&o=pl,d&p=1050&_dc="
-            print 'hangye pages:'+str(dictStart['hangye']['pages'])
+            # print 'hangye pages:'+str(dictStart['hangye']['pages'])
 
             #地域
             req = getJrjimgUrl(u"http://q.jrjimg.cn/?q=cn|bk|3&n=hqa&c=l&o=pl,d&p=1050&_dc="+u'%d'%(time.time()*1000))
             dictStart['diyu']['pages'] = int( re.match(r'[\s\S]*?,pages:([0-9]*),', req.text[0:100]).group(1))
             dictStart['diyu']['name'] = u'地域'
             dictStart['diyu']['url'] = u"http://q.jrjimg.cn/?q=cn|bk|3&n=hqa&c=l&o=pl,d&p={page}050&_dc="
-            print 'diyu pages:'+str(dictStart['diyu']['pages'])
+            # print 'diyu pages:'+str(dictStart['diyu']['pages'])
 
             #证监会
             req = getJrjimgUrl(u"http://q.jrjimg.cn/?q=cn|bk|1&n=hqa&c=l&o=pl,d&p=1050&_dc="+u'%d'%(time.time()*1000))
             dictStart['zhengjianhui']['pages'] = int( re.match(r'[\s\S]*?,pages:([0-9]*),', req.text[0:100]).group(1))
             dictStart['zhengjianhui']['name'] = u'证监会'
             dictStart['zhengjianhui']['url'] = u"http://q.jrjimg.cn/?q=cn|bk|1&n=hqa&c=l&o=pl,d&p={page}050&_dc="
-            print 'zhengjianhui pages:'+str(dictStart['zhengjianhui']['pages'])
+            # print 'zhengjianhui pages:'+str(dictStart['zhengjianhui']['pages'])
 
             #全球
             req = getJrjimgUrl(u"http://q.jrjimg.cn/?q=cn|bk|2&n=hqa&c=l&o=pl,d&p=1050&_dc="+u'%d'%(time.time()*1000))
             dictStart['quanqiu']['pages'] = int( re.match(r'[\s\S]*?,pages:([0-9]*),', req.text).group(1))
             dictStart['quanqiu']['name'] = u'全球'
             dictStart['quanqiu']['url'] = u"http://q.jrjimg.cn/?q=cn|bk|2&n=hqa&c=l&o=pl,d&p={page}050&_dc="
-            print 'quanqiu pages:'+str(dictStart['quanqiu']['pages'])
+            # print 'quanqiu pages:'+str(dictStart['quanqiu']['pages'])
 
             #得到全部板块
             try:
                 f = open('step0.txt', 'r')
                 f.close()
             except IOError, e:
-                print 'exception1'+str(e)
+                # print 'exception1'+str(e)
                 #本地无缓存全部板块
                 for key in dictStart:
-                    print key
+                    # print key
                     for i in range(1, int(dictStart[key]['pages'])+1):
                         req = getJrjimgUrl(dictStart[key]['url'].replace('{page}', str(i))+u'%d'%(time.time()*1000), timeout=10)
                         # print req.encoding#gbk
                         listPlate = eval(re.sub(r'^[\s\S]*?=({[\s\S]*});', r'\1', req.text).encode('utf-8'), type('Dummy', (dict,), dict(__getitem__=lambda s,n:n))())['HqData']
                         for each in listPlate:
-                            print each[0]
+                            # print each[0]
                             dictPlate[each[0]] = {}
                             dictPlate[each[0]]['code'] = each[0]
                             dictPlate[each[0]]['name'] = each[2]
@@ -201,9 +201,9 @@ def synShares(b_save_file=False):
                 f.write(json.dumps(dictPlate))
                 f.close()
 
-                for key in dictPlate:
-                    print dictPlate[key]['code'], dictPlate[key]['name'], dictPlate[key]['pages'], dictPlate[key]['url']
-                print len(dictPlate)
+                # for key in dictPlate:
+                #     print dictPlate[key]['code'], dictPlate[key]['name'], dictPlate[key]['pages'], dictPlate[key]['url']
+                # print len(dictPlate)
 
 
             #得到所有股票
@@ -212,20 +212,20 @@ def synShares(b_save_file=False):
                 f = open('share_name.txt', 'r')
                 f.close()
             except IOError, e:
-                print 'exception2'+str(e)
+                # print 'exception2'+str(e)
                 #本地无缓存所有股票
                 f = open('step0.txt', 'r')
                 dictPlate = json.loads(f.read())
                 f.close()
                 for key in dictPlate:
-                    print key
+                    # print key
                     for i in range(1, int(dictPlate[key]['pages'])+1):
                         # time.sleep(1)
                         req = getJrjimgUrl(dictPlate[key]['url'].replace('{page}', str(i))+u'%d'%(time.time()*1000), timeout=10)
                         #print req.encoding#gbk
                         listShares = eval(re.sub(r'^[\s\S]*?=({[\s\S]*});', r'\1', req.text).encode('utf-8'), type('Dummy', (dict,), dict(__getitem__=lambda s,n:n))())['HqData']
                         for each in listShares:
-                            print each[0]
+                            # print each[0]
                             if each[0].find('sh')>-1:
                                 codeShare = each[1]+'.SS'
                             elif each[0].find('sz')>-1:
@@ -243,9 +243,9 @@ def synShares(b_save_file=False):
                                 allShares[codeShare]['name'] = each[2].replace(' ', '')
                                 allShares[codeShare]['plates'] = '' # dictPlate[key]['name']
 
-                for key in allShares:
-                    print allShares[key]['code'], allShares[key]['name'], allShares[key]['plates']
-                print conut, len(allShares)
+                # for key in allShares:
+                #     print allShares[key]['code'], allShares[key]['name'], allShares[key]['plates']
+                # print conut, len(allShares)
 
                 #缓存所有股票至本地
                 f = open('share_name.txt', 'w')
@@ -253,7 +253,7 @@ def synShares(b_save_file=False):
                 f.close()
 
             if b_save_file==True:
-                print 'synShares finish(save file, no sql)'
+                # print 'synShares finish(save file, no sql)'
                 return
 
             # #保存至mysql
