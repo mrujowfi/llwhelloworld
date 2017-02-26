@@ -89,13 +89,15 @@ def synHistory(shares, date1='2015-01-01', date2='today'):
             for i in range(len(listCode)):
                 each = listCode[i]
                 print str(i)+'/'+str(len(listCode))
-                if os.path.exists(os.path.dirname(__file__)+'/data_share/'+each+'.txt'):
-                    os.remove(os.path.dirname(__file__)+'/data_share/'+each+'.txt')
+                # not in weixin
+                # if os.path.exists(os.path.dirname(__file__)+'/data_share/'+each+'.txt'):
+                #     os.remove(os.path.dirname(__file__)+'/data_share/'+each+'.txt')
                 data = get_historical_prices(each, startDate, endDate, proxies)
                 result[each] = data
-                f = open(os.path.dirname(__file__)+'/data_share/'+each+'.txt', 'w')
-                f.write(json.dumps(data, sort_keys=True, indent=4, separators=(',', ': ')))
-                f.close()
+                # not in weixin
+                # f = open(os.path.dirname(__file__)+'/data_share/'+each+'.txt', 'w')
+                # f.write(json.dumps(data, sort_keys=True, indent=4, separators=(',', ': ')))
+                # f.close()
         except Exception, e:
             print 'step2 error:'+str(e)
             stack = traceback.format_exc()
