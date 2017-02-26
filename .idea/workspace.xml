@@ -39,8 +39,8 @@
       <file leaf-file-name="llwprivate.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/llwprivate.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="88" column="86" lean-forward="false" selection-start-line="88" selection-start-column="86" selection-end-line="88" selection-end-column="86" />
+            <state relative-caret-position="465">
+              <caret line="86" column="50" lean-forward="true" selection-start-line="86" selection-start-column="50" selection-end-line="86" selection-end-column="50" />
               <folding>
                 <element signature="e#42#52#0" expanded="true" />
               </folding>
@@ -960,16 +960,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/module_share_kelly.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="36" lean-forward="false" selection-start-line="19" selection-start-column="36" selection-end-line="19" selection-end-column="36" />
-          <folding>
-            <element signature="e#34#45#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/data_share/233.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -982,14 +972,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
           <caret line="8" column="30" lean-forward="false" selection-start-line="8" selection-start-column="30" selection-end-line="8" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/reply_text.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="20" lean-forward="false" selection-start-line="5" selection-start-column="20" selection-end-line="5" selection-end-column="20" />
           <folding />
         </state>
       </provider>
@@ -1012,10 +994,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/module_share_kelly.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" column="36" lean-forward="false" selection-start-line="19" selection-start-column="36" selection-end-line="19" selection-end-column="36" />
+          <folding>
+            <element signature="e#34#45#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/reply_text.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="20" lean-forward="false" selection-start-line="5" selection-start-column="20" selection-end-line="5" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/llwprivate.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="88" column="86" lean-forward="false" selection-start-line="88" selection-start-column="86" selection-end-line="88" selection-end-column="86" />
+        <state relative-caret-position="465">
+          <caret line="86" column="50" lean-forward="true" selection-start-line="86" selection-start-column="50" selection-end-line="86" selection-end-column="50" />
           <folding>
             <element signature="e#42#52#0" expanded="true" />
           </folding>

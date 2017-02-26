@@ -60,51 +60,37 @@ class llwprivate:
         try:
             xml = etree.fromstring(str_xml)#进行XML解析
             msgType = xml.find("MsgType").text
-            lbg += '1'
             fromUser = xml.find("FromUserName").text
-            lbg += '1'
             toUser = xml.find("ToUserName").text
-            lbg += '1'
-            content = self.process(xml.find("Content").text)  # 获得用户所输入的内容
-            lbg += '2'
+            # 获得用户所输入的内容
+            content = self.process(xml.find("Content").text)
             return self.render.reply_text(fromUser,toUser,int(time.time()),u"..."+content)
         except Exception, e:
             try:
-                lbg += '3'
                 xml = etree.fromstring(str_xml)#进行XML解析
-                lbg += '4'
                 msgType = xml.find("MsgType").text
-                lbg += '4'
                 fromUser = xml.find("FromUserName").text
-                lbg += '4'
                 toUser = xml.find("ToUserName").text
-                lbg += '4'
                 if fromUser == my_phone:
                     except_str = u'_A_'
-                    lbg += '5'
                     info = sys.exc_info()
-                    lbg += '5'
                     for except_file, lineno, function, text in traceback.extract_tb(info[2]):
                         except_str = except_str + except_file + u' line: ' + str(
                             lineno) + u' in ' + function + u'\n' + text.decode('utf-8') + u'\n'
                         # except_str = except_str + except_file+u' line: '+str(lineno)+u' in '+function+u'\n'+text+u'\n'
                     except_str += u"_B_** %s: %s" % info[:2]
-                    lbg += '6'
                     return self.render.reply_text(fromUser,toUser,int(time.time()),lbg+u"__lbg__"+except_str)
                 else:
-                    return self.render.reply_text(fromUser,toUser,int(time.time()),lbg)
+                    return self.render.reply_text(fromUser,toUser,int(time.time()),lbg+fromUser)
             except Exception, e:
                 xml = etree.fromstring(str_xml)#进行XML解析
-                lbg += '7'
                 msgType = xml.find("MsgType").text
                 fromUser = xml.find("FromUserName").text
                 toUser = xml.find("ToUserName").text
-                lbg += '8'
                 if fromUser == my_phone:
-                    lbg += '9'
                     return self.render.reply_text(fromUser,toUser,int(time.time()),lbg+u"_lbg_"+str(e))
                 else:
-                    return self.render.reply_text(fromUser,toUser,int(time.time()),lbg)
+                    return self.render.reply_text(fromUser,toUser,int(time.time()),lbg+fromUser)
 
     def process(self, content):
         result = '???'
