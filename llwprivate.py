@@ -76,7 +76,7 @@ class llwprivate:
                     info = sys.exc_info()
                     for except_file, lineno, function, text in traceback.extract_tb(info[2]):
                         except_str = except_str + except_file + u' line: ' + str(
-                            lineno) + u' in ' + function + u'\n' + text.decode('utf-8') + u'\n'
+                            lineno) + u' in ' + function + u'\n' + text.decode('utf-8') + u'\n\n'
                         # except_str = except_str + except_file+u' line: '+str(lineno)+u' in '+function+u'\n'+text+u'\n'
                     except_str += u"_B_** %s: %s" % info[:2]
                     return self.render.reply_text(fromUser,toUser,int(time.time()),lbg+u"__lbg__"+except_str)
@@ -106,7 +106,7 @@ class llwprivate:
             result = str(module_share_kelly.test_read())
         elif content == '2334':
             data = module_share.synHistory(['600229.SS'])
-            result = str(float(module_share_kelly.load_share('600229.SS', data['600229.SS'])[1]))
+            # result = str(float(module_share_kelly.load_share('600229.SS', data['600229.SS'])[1]))
         elif content.startswith('2335_'):
             try:
                 share = content[5:]
