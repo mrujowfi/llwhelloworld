@@ -88,7 +88,7 @@ class llwprivate:
                         except_str = except_str + except_file+u' line: '+str(lineno)+u' in '+function+u'\n'+text+u'\n'
                     except_str += u"_B_** %s: %s" % info[:2]
                     lbg += '6'
-                    return self.render.reply_text(fromUser,toUser,int(time.time()),u".."+except_str)
+                    return self.render.reply_text(fromUser,toUser,int(time.time()),lbg+u"__lbg__"+except_str)
                 else:
                     return self.render.reply_text(fromUser,toUser,int(time.time()),lbg)
             except Exception, e:
@@ -100,7 +100,7 @@ class llwprivate:
                 lbg += '8'
                 if fromUser == my_phone:
                     lbg += '9'
-                    return self.render.reply_text(fromUser,toUser,int(time.time()),u"."+str(e))
+                    return self.render.reply_text(fromUser,toUser,int(time.time()),lbg+u"_lbg_"+str(e))
                 else:
                     return self.render.reply_text(fromUser,toUser,int(time.time()),lbg)
 
