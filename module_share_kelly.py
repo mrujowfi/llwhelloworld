@@ -78,7 +78,7 @@ def count_f3(txt_name):
             else:
                 f = 0.5
             f = round(f, 3)
-            # print f, max_last, min_last
+            print f, max_last, min_last
 
             if f > 1:
                 f = 1
@@ -88,7 +88,7 @@ def count_f3(txt_name):
                 f = 1
             if last_close < min_last:
                 f = 0
-            # print f
+            print f
 
             trade(last_close, f)
 
