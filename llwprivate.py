@@ -54,6 +54,7 @@ class llwprivate:
                 return repr(e)
 
     def POST(self):
+        my_phone = 'oz2nXjuKi6FO3iQz18AR7ArLIYAY'
         str_xml = web.data() #获得post来的数据
         try:
             xml = etree.fromstring(str_xml)#进行XML解析
@@ -61,14 +62,14 @@ class llwprivate:
             fromUser = xml.find("FromUserName").text
             toUser = xml.find("ToUserName").text
             content = self.process(xml.find("Content").text)  # 获得用户所输入的内容
-            return self.render.reply_text(fromUser,toUser,int(time.time()),u"..."+content)
+            return self.render.reply_text(fromUser,toUser,int(time.time()),u"..."+fromUser)
         except Exception, e:
             try:
                 xml = etree.fromstring(str_xml)#进行XML解析
                 msgType = xml.find("MsgType").text
                 fromUser = xml.find("FromUserName").text
                 toUser = xml.find("ToUserName").text
-                if fromUser == 'oz2nXjuKi6FO3iQz18AR7ArLIYAY':
+                if fromUser == my_phone:
                     except_str = u''
                     info = sys.exc_info()
                     for except_file, lineno, function, text in traceback.extract_tb(info[2]):
@@ -82,7 +83,7 @@ class llwprivate:
                 msgType = xml.find("MsgType").text
                 fromUser = xml.find("FromUserName").text
                 toUser = xml.find("ToUserName").text
-                if fromUser == 'oz2nXjuKi6FO3iQz18AR7ArLIYAY':
+                if fromUser == my_phone:
                     return self.render.reply_text(fromUser,toUser,int(time.time()),u"."+str(e))
                 else:
                     return self.render.reply_text(fromUser,toUser,int(time.time()),fromUser)
