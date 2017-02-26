@@ -86,7 +86,7 @@ class llwprivate:
                     lbg += '5'
                     for except_file, lineno, function, text in traceback.extract_tb(info[2]):
                         except_str = except_str + except_file + u' line: ' + str(
-                            lineno) + u' in ' + function + u'\n' + text + u'\n'
+                            lineno) + u' in ' + function + u'\n' + text.decode('utf-8') + u'\n'
                         # except_str = except_str + except_file+u' line: '+str(lineno)+u' in '+function+u'\n'+text+u'\n'
                     except_str += u"_B_** %s: %s" % info[:2]
                     lbg += '6'
