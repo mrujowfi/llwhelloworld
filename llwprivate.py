@@ -106,7 +106,7 @@ class llwprivate:
             result = str(module_share_kelly.test_read())
         elif content == '2334':
             data = module_share.synHistory(['600229.SS'])
-            # result = str(float(module_share_kelly.load_share('600229.SS', data['600229.SS'])[1]))
+            result = str(float(module_share_kelly.load_share('600229.SS', data['600229.SS'])[1]))
         elif content.startswith('2335_'):
             try:
                 share = content[5:]
