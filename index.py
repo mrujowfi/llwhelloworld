@@ -13,10 +13,12 @@ class index:
             data = web.input()
             do = data.do
             if do == 'init_share_name':
-                t1 = threading.Thread(target=module_share.synShares, args=(u'爱情买卖',))
+                t1 = threading.Thread(target=module_share.synShares, args=(u'a',))
                 t1.setDaemon(True)
                 t1.start()
             elif do == 'check_share_name':
+                f = open('share_name.txt', 'w')
+                f.close()
                 f = open('share_name.txt')
                 f.close()
         except Exception, e:

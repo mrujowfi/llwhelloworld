@@ -19,6 +19,8 @@ import datetime
 import traceback
 import module_share_kelly
 import re
+import smtplib
+from email.mime.text import MIMEText
 import pprint
 
 global allShares, dictStart, getShares, dictPlate
@@ -293,6 +295,7 @@ def synShares(b_save_file=False):
             while_count += 1
             continue
         break
+        # sendNotifyMail('easyprowllw@163.com', 'init_share_name ok', 'init_share_name ok')
     return str(while_count)+' '
 
 def getJrjimgUrl(url, timeout=30):
@@ -309,6 +312,29 @@ def getJrjimgUrl(url, timeout=30):
     return req
 
 
+#发送邮件，默认是用easyprowllw@163.com发送
+def sendNotifyMail(listTo, title, content, fromUser='easyprowllw', fromPassword='prowllw10'):#发送邮件
+    mail_host="smtp.163.com"#设置服务器
+    mail_postfix="163.com"  #发件箱的后缀
+
+    me="easy"+"<"+fromUser+"@"+mail_postfix+">"#接收方显示
+    msg = MIMEText(content, _subtype='plain', _charset='gb2312')#内容
+    msg['Subject'] = title#标题
+    msg['From'] = me
+    msg['To'] = ";".join(listTo)
+    try:
+        server = smtplib.SMTP()
+        server.connect(mail_host)
+        server.login(fromUser,fromPassword)
+        server.sendmail(me, listTo, msg.as_string())
+        server.close()
+        return True
+    except Exception, e:
+        print 'error: ', str(e)
+        server.close()
+        return False
+
+
 def test_requests():
     resp = requests.get("http://llwhelloworld.applinzi.com/")
     return resp.content
@@ -323,7 +349,8 @@ def test_write():
 
 
 if __name__ == '__main__':
-    print os.path.dirname(__file__)
-    data = synHistory(['600229.SS'])
-    print module_share_kelly.load_share('600229.SS', data['600229.SS'])[1]
-    print test_requests()
+    # print os.path.dirname(__file__)
+    # data = synHistory(['600229.SS'])
+    # print module_share_kelly.load_share('600229.SS', data['600229.SS'])[1]
+    # print test_requests()
+    synShares()
