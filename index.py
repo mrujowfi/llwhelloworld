@@ -17,8 +17,8 @@ class index:
                 t1.setDaemon(True)
                 t1.start()
             elif do == 'check_share_name':
-                f = open('share_name.txt', 'w')
-                f.close()
+                # f = open('share_name.txt', 'w')
+                # f.close()
                 f = open('share_name.txt')
                 f.close()
         except Exception, e:
